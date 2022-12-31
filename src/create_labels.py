@@ -14,20 +14,13 @@ class labels:
 
     def get_labels():
         try:
-            # get file names and store it in list
-            all_files = []
-            for i in os.walk("src/recordings"):
-                all_files.append(i)
-            all_files = all_files[0][2] 
-
-
-            # generate labels from file name
-            labels = []
-            for i in all_files:
-                labels.append(i[0])
-
-            # create dataframe
-            df_audio = pd.DataFrame(list(zip(all_files, labels)),columns =['path', 'label'])
+            #Creating a dataframe(name=df_audio) with two columns(path, label).   
+            #Eg: 0_jackson_0 --> 0 (label)
+            #0_jackson_43 --> 0 (label)
+            all_files = os.listdir('src/recordings')
+            df_audio = pd.DataFrame()
+            df_audio['path'] = ['src/recordings/' + ele for ele in all_files]
+            df_audio['label'] = [ele.split('_')[0] for ele in all_files]
 
             label_path = path.abspath(path.join(labels_path))
             logging.info("Labeling completed")
