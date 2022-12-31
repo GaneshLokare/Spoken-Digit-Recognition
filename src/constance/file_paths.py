@@ -1,0 +1,1 @@
+labels_path = "src/artifacts/labels.csv"
